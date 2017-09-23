@@ -1,0 +1,6 @@
+.idea/
+composer.lock
+vendor/
+.env
+node_modules/
+bower.json

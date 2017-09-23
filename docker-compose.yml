@@ -1,0 +1,35 @@
+version: "2"
+services:
+  db:
+    image: mariadb:10.0.20 # hard version https://dba.stackexchange.com/questions/155914/mariadb-docker-error-cant-init-tc-log
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    environment:
+      - "MYSQL_DATABASE"
+      - "MYSQL_USER"
+      - "MYSQL_PASSWORD"
+      - "MYSQL_ROOT_PASSWORD"
+      - "DB_PATH"
+
+  # APP_PATH special for old Windows users https://docs.docker.com/toolbox/toolbox_install_windows/#optional-add-shared-directories
+  composer:
+    restart: 'no'
+    image: composer/composer:php7
+    command:
+      - install
+    volumes:
+      - ${APP_PATH}/:/app
+
+  web:
+    image: webdevops/php-nginx:latest
+    volumes:
+      - ${APP_PATH}/:/app:rw
+    ports:
+      - 80:80
+    environment:
+      - "WEB_DOCUMENT_ROOT"
+      - "WEB_DEBUG_MODE"
+    links:
+      - "db"
