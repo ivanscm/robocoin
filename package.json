@@ -2,7 +2,9 @@
   "name": "robocoin-web",
   "version": "0.0.1",
   "dependencies": {
-    "vue": "~2.4",
-    "vuetify": "~0.15"
+    "jquery": "~2",
+    "nette-forms": "~2.4",
+    "nette.ajax.js": "~2.3",
+    "materialize-css": "~0.100"
   }
 }

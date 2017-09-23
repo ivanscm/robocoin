@@ -11,27 +11,29 @@
     <title>{block title|stripHtml|trim}{/block} | RoboCoin</title>
     {block head}
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-        <link href="{$basePath}/css/vuetify.min.js" rel="stylesheet">
+        <link href="{$basePath}/css/materialize.min.css" rel="stylesheet">
     {/block}
 </head>
 
 <body>
-<div id="app">
-    <v-app>
-        <main>
-            <v-container>Hello world</v-container>
-        </main>
-    </v-app>
-</div>
+
 {include app}
 <div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
 
 
 <p id="logged-in" n:if="$user->loggedIn">Signed in as {$user->identity->realname}. <a n:href="Sign:out">Sign out</a></p>
+
 {block scripts}
-    <script src="{$basePath}/js/vue.min.js"></script>
-    <script src="{$basePath}/js/vuetify.min.js"></script>
-    <script src="{$basePath}/js/app.js"></script>
+    <script src="{$basePath}/js/jquery.min.js"></script>
+    <script src="{$basePath}/js/materialize.min.js"></script>
+    <script src="{$basePath}/js/nette.ajax.js"></script>
+    <script src="{$basePath}/js/netteForms.min.js"></script>
+    <!-- script src="{$basePath}/js/app.js"></script -->
+    <script n:syntax="off">
+        $(function () {
+            $.nette.init();
+        });
+    </script>
 {/block}
 </body>
 </html>
