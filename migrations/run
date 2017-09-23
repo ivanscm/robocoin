@@ -1,0 +1,30 @@
+#!/usr/bin/env php
+<?php
+use Nextras\Migrations\Bridges;
+use Nextras\Migrations\Controllers;
+use Nextras\Migrations\Drivers;
+use Nextras\Migrations\Extensions;
+
+require __DIR__ . '/../vendor/autoload.php';
+
+$config = \Nette\Neon\Neon::decode(file_get_contents(__DIR__ . '/../app/config.neon'));
+
+$conn = new Nette\Database\Connection(
+    $config['database']['dsn'],
+    $config['database']['user'],
+    $config['database']['password']
+);
+
+$dbal = new Bridges\NetteDatabase\NetteAdapter($conn);
+
+$driver = new Drivers\MySqlDriver($dbal);
+
+$controller = new Controllers\ConsoleController($driver);
+
+$baseDir = __DIR__;
+$controller->addGroup('structures', "$baseDir/structures");
+$controller->addGroup('basic', "$baseDir/basic", ['structures']);
+$controller->addGroup('dummy', "$baseDir/dummy", ['basic']);
+$controller->addExtension('sql', new Extensions\SqlHandler($driver));
+
+$controller->run();
