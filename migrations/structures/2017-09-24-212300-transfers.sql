@@ -3,7 +3,7 @@ CREATE TABLE `transfers` (
   `from_user_id` INT            NOT NULL,
   `to_user_id`   INT            NOT NULL,
   `type`         VARCHAR(24)    NOT NULL,
-  `amout`        DECIMAL(10, 2) NOT NULL,
+  `amount`        DECIMAL(10, 2) NOT NULL,
   `dt`           DATETIME       NOT NULL
 )
   ENGINE = 'InnoDB'
