@@ -33,7 +33,10 @@ class Money
      */
     public function findHistoryByUser($user_id)
     {
-        return $this->database->table(self::TRANSFERS_TABLE_NAME)->where('from_user_id = ? OR to_user_id = ?', [$user_id, $user_id]);
+        return $this->database
+            ->table(self::TRANSFERS_TABLE_NAME)
+            ->where('from_user_id = ? OR to_user_id = ?', [$user_id, $user_id])
+            ->order('dt DESC');
     }
 
     /**
