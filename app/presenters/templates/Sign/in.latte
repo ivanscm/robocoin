@@ -1,0 +1,29 @@
+{define title}Sign in{/define}
+{block app}
+<div class="row">
+    <div class="col s12">
+        {form signInForm}
+            <center>
+                <div class="z-depth-3 y-depth-3 x-depth-3 grey green-text lighten-4 row"
+                     style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px; margin-top: 100px; solid #EEE;">
+                    <div class="section"></div>
+
+                    <div class='row'>
+                        <div class='input-field col s12'>
+                            {input user_id}
+                            {label user_id}
+                        </div>
+                    </div>
+                    <br/>
+                    <center>
+                        <div class='row'>
+                            {input login style=>'margin-left:60px;', class=>'col  s6 btn btn-small white black-text  waves-effect z-depth-1 y-depth-1'}
+                        </div>
+                    </center>
+
+                </div>
+
+            </center>
+        {/form}
+    </div>
+</div>

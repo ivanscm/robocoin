@@ -1,2 +1,26 @@
 {define title}Homepage{/define}
+{block head}
+    {include #parent}
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?lang=sql&skin=desert"></script>
+{/block}
 {block app}
+<div class="row">
+    <div class="col s12">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Test task #1</span>
+                <pre class="prettyprint"><code class="language-sql">{$commentsSQL}</code></pre>
+            </div>
+        </div>
+        <ul class="collection">
+            {foreach $comments as $comment}
+                <li class="collection-item avatar">
+                    <i class="material-icons circle">perm_identity</i>
+                    <span class="title">{$comment->user_name}</span>
+                    <p>{$comment->comment}</p>
+                </li>
+            {/foreach}
+        </ul>
+    </div>
+
+</div>

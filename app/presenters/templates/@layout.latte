@@ -16,12 +16,68 @@
 </head>
 
 <body>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a n:href="Default:default" class="brand-logo">RoboCoin</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {if $user->isLoggedIn()}
+                    <li><a href="#">Notify</a></li>
+                    <li><a href="#">History</a></li>
+                    <li><a href="#"><i class="material-icons right left">send</i> Send coins</a></li>
+                    <li><a n:href="Sign:out">Sign Out</a></li>
+                {else}
+                    <li><a n:href="Sign:in">Sign In</a></li>
+                {/if}
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div n:foreach="$flashes as $flash" class="card-panel {$flash->type}">
+                <span class="white-text">{$flash->message}</span>
+            </div>
+        </div>
+        {if $user->isLoggedIn()}
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Welcome!</span>
+                        <p class="center">{$user->getIdentity()->name}</p>
+                        <p class="center yellow-text text-darken-3"><i class="material-icons large">mood</i></p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">Notify</a>
+                        <a n:href="Sign:out">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m6">
+                <div class="card deep-purple lighten-3">
+                    <div class="card-content white-text">
+                        <span class="card-title">Balance</span>
+                        <div class="row">
+                            <div class="col m6">
+                                <h2>{$user->getIdentity()->balance}</h2>
+                            </div>
+                            <div class="col m6">
+                                <i class="material-icons large right grey-text text-lighten-3">account_balance_wallet</i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        <a href="#" class="white-text">History</a>
+                        <a href="#" class="white-text">Send coins</a>
+                    </div>
+                </div>
+            </div>
+        {/if}
+    </div>
+    {include app}
+</div>
 
-{include app}
-<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
-
-
-<p id="logged-in" n:if="$user->loggedIn">Signed in as {$user->identity->realname}. <a n:href="Sign:out">Sign out</a></p>
 
 {block scripts}
     <script src="{$basePath}/js/jquery.min.js"></script>
