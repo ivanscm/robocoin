@@ -1,0 +1,59 @@
+{block app}
+<div class="row">
+    <div class="col s12">
+        <nav>
+            <div class="nav-wrapper">
+                {snippet nav_menu}
+                    <div class="col s12">
+                        <a n:href="Money:send" class="breadcrumb" n:block="title">Send coins</a>
+                        {ifset $confirm}
+                            <span class="breadcrumb">Confirm</span>
+                        {/ifset}
+                    </div>
+                {/snippet}
+            </div>
+        </nav>
+        <div class="section"></div>
+        {snippet form}
+            {ifset $confirm}
+                <h3>Please confirm the transfer of coins</h3>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input disabled id="recipient_name" type="text" class="validate"
+                               value="{$confirm['recipient_name']}">
+                        <label class="active" for="recipient_name">Recipient User Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <i class="material-icons prefix">input</i>
+                        <input disabled id="amount" type="text" class="validate" value="{$confirm['amount']}">
+                        <label class="active" for="amount">Coins for send</label>
+                    </div>
+                    <a n:href="ConfirmSend! name=> $confirm['recipient_name']" class="ajax waves-effect waves-light btn right">Confirm send</a>
+                </div>
+            {else}
+                {form sendMoneyForm class=>'ajax'}
+                    <div n:if="$form->hasErrors()" class="card-panel red">
+                        <ul class="errors">
+                            <li n:foreach="$form->errors as $error"><span class="white-text">{$error}</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">account_circle</i>
+                            {input recipient_id}
+                            {label recipient_id/}
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix">input</i>
+                            {input amount}
+                            {label amount/}
+                        </div>
+                    </div>
+                    {input send class=>'waves-effect waves-light btn right'}
+                {/form}
+            {/ifset}
+        {/snippet}
+    </div>
+</div>

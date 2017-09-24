@@ -1,0 +1,38 @@
+{block app}
+<div class="row">
+    <div class="col s12">
+        <nav>
+            <div class="nav-wrapper">
+                <div class="col s12">
+                    <a n:href="Money:" class="breadcrumb" n:block="title">History</a>
+                </div>
+            </div>
+        </nav>
+        <div class="section"></div>
+        <table class="highlight">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {foreach $history as $histItem}
+                <tr>
+                    <td>{$histItem->dt|date:'%d.%m.%Y'}</td>
+                    <td>{if $histItem->type == 'in'}Deposit{elseif $histItem->type == 'out'}Payment{else}Unknown{/if}</td>
+                    <td>{$histItem->amount} RC</td>
+                    <td>{if $histItem->from_user_id == 0}System{elseif $histItem->from_user_id == $user->id}You{else}{$histItem->ref('users', 'from_user_id')->name}{/if}</td>
+                    <td>{if $histItem->to_user_id == 0}System{elseif $histItem->to_user_id == $user->id}You{else}{$histItem->ref('users', 'to_user_id')->name}{/if}</td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+
+
+    </div>
+</div>

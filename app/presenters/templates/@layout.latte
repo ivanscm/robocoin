@@ -23,8 +23,9 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {if $user->isLoggedIn()}
                     <li><a href="#">Notify</a></li>
-                    <li><a href="#">History</a></li>
-                    <li><a href="#"><i class="material-icons right left">send</i> Send coins</a></li>
+                    <li {ifCurrent Money:}class="active"{/ifCurrent}><a n:href="Money:">History</a></li>
+                    <li {ifCurrent Money:send}class="active"{/ifCurrent}><a n:href="Money:send"><i
+                                    class="material-icons right left">send</i> Send coins</a></li>
                     <li><a n:href="Sign:out">Sign Out</a></li>
                 {else}
                     <li><a n:href="Sign:in">Sign In</a></li>
@@ -61,6 +62,7 @@
                         <div class="row">
                             <div class="col m6">
                                 <h2>{$user->getIdentity()->balance}</h2>
+                                <span>RC</span>
                             </div>
                             <div class="col m6">
                                 <i class="material-icons large right grey-text text-lighten-3">account_balance_wallet</i>
@@ -68,8 +70,8 @@
                         </div>
                     </div>
                     <div class="card-action">
-                        <a href="#" class="white-text">History</a>
-                        <a href="#" class="white-text">Send coins</a>
+                        <a n:href="Money:" class="white-text">History</a>
+                        <a n:href="Money:send" class="white-text">Send coins</a>
                     </div>
                 </div>
             </div>
@@ -88,6 +90,7 @@
     <script n:syntax="off">
         $(function () {
             $.nette.init();
+            Materialize.updateTextFields();
         });
     </script>
 {/block}

@@ -40,4 +40,14 @@ class Users implements Nette\Security\IAuthenticator
         return new Nette\Security\Identity($row[self::COLUMN_ID], self::ROLE_DEFAULT, $arr);
     }
 
+    /**
+     * Get user by Id
+     * @param int $id
+     * @return Nette\Database\Table\IRow
+     */
+    public function get($id)
+    {
+        return $this->database->table(self::TABLE_NAME_USERS)->get($id);
+    }
+
 }
