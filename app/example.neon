@@ -1,0 +1,26 @@
+php:
+	date.timezone: Asia/Novokuznetsk
+
+database:
+	dsn: 'mysql:host=db;dbname=robocoin'
+	user: 'robocoin'
+	password: 'your pass here'
+	options:
+		lazy: yes
+
+extensions:
+	migrations: Nextras\Migrations\Bridges\NetteDI\MigrationsExtension
+
+migrations:
+	dir: %appDir%/../migrations
+	driver: mysql
+	dbal: nette
+
+application:
+	mapping:
+		*: App\Presenters\*Presenter
+
+services:
+	authenticator: App\Model\Users
+	- App\Model\Comments
+	- App\Model\Money
