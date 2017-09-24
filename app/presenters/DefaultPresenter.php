@@ -4,6 +4,10 @@ namespace App\Presenters;
 
 use App\Model;
 
+/**
+ * Class DefaultPresenter
+ * @package App\Presenters
+ */
 class DefaultPresenter extends BasePresenter
 {
     /**
@@ -12,6 +16,9 @@ class DefaultPresenter extends BasePresenter
      */
     public $commentsModel;
 
+    /**
+     * Homepage controller
+     */
     public function renderDefault()
     {
         $comments = $this->commentsModel->find(10);

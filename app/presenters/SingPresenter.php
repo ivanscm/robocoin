@@ -5,6 +5,10 @@ use Nette;
 
 class SignPresenter extends BasePresenter
 {
+    /**
+     * Sign In form
+     * @return Nette\Application\UI\Form
+     */
     protected function createComponentSignInForm()
     {
         $form = new Nette\Application\UI\Form();
@@ -16,6 +20,11 @@ class SignPresenter extends BasePresenter
         return $form;
     }
 
+    /**
+     * Sign In form success callback
+     * @param $form Nette\Application\UI\Form
+     * @param $values mixed
+     */
     public function signInFormOnSuccess($form, $values)
     {
         try {
@@ -28,6 +37,9 @@ class SignPresenter extends BasePresenter
         $this->redirect('Default:');
     }
 
+    /**
+     * Action for out from app
+     */
     public function actionOut()
     {
         $this->getUser()->logout();

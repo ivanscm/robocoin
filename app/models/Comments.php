@@ -6,7 +6,14 @@ use Nette;
 
 class Comments
 {
+    /**
+     * Comments table name
+     */
     const TABLE_NAME_COMMENTS = 'comments';
+
+    /**
+     * Users table name
+     */
     const TABLE_NAME_USERS = 'users';
 
     /**
